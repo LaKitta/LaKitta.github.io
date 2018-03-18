@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+  <head>
+        <title>Map for IF24 Project</title>
+    <style>
+       html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+        }
+     
+        #note {
+            
+            margin: auto;
+            width: 90%;
+        }
+        #map {
+            margin: auto;
+            height: 400px;
+            width: 90%;
+        }
+    </style>
+  </head>
+  <body>
+      
+          
+    
+    <div class="note">
+      
+          <p align="center"><img src="icons\plane.png"> Hub aérien &bull; <img src="icons\warehouse.png">  Stock house &bull; <img src="icons\client.png"> Principaux clients &bull; <img src="icons\port.png"> Port du Havre &bull;</p></div>  
+          <div id="map"> </div>
+    <script>
+      function initMap() {
+        var styledMapType = new google.maps.StyledMapType(
+            [
+                {
+                    "featureType": "administrative",
+                    "elementType": "geometry",
+                    "stylers": [{"visibility": "off"}]
+                },{
+                    "featureType": "administrative.land_parcel",
+                    "stylers": [{"visibility": "off"}]
+                },{
+                    "featureType": "administrative.neighborhood",
+                    "stylers": [{"visibility": "off"}]
+                },{
+                    "featureType": "poi",
+                    "stylers": [{"visibility": "off"}]
+                },{
+                    "featureType": "road",
+                    "elementType": "labels",
+                    "stylers": [{"visibility": "off"}]
+                },{
+                    "featureType": "road",
+                    "elementType": "labels.icon",
+                    "stylers": [{"visibility": "off"}]
+                },{
+                    "featureType": "road.arterial",
+                    "elementType": "labels",
+                    "stylers": [{"visibility": "off"}]
+                },{
+                    "featureType": "road.highway",
+                    "elementType": "labels",
+                    "stylers": [{"visibility": "off"}]
+                },{
+                    "featureType": "road.local",
+                     "stylers": [{"visibility": "off"}]
+                },{
+                    "featureType": "transit",
+                    "stylers": [{"visibility": "off"}]
+                },{
+                    "featureType": "water",
+                    "elementType": "labels.text",
+                    "stylers": [{"visibility": "off"}]
+                }
+            ]);
+        var bourges = {lat: 48.0810120000, lng:2.3987820000};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 6,
+          center: bourges
+        });
+
+        var icons = {
+          warehouse: {
+            //name: 'Parking',
+            icon: 'icons/warehouse.png'
+          },
+          port: {
+            //name: 'Library',
+            icon: 'icons/port.png'
+          },
+          airport: {
+            //name: 'Info',
+            icon: 'icons/plane.png'
+          },
+          client: {
+            //name: 'client',
+            icon: 'icons/client.png'
+          }
+        };
+
+        var features = [
+          {
+            position: new google.maps.LatLng(49.0810120000, 1.0987820000),
+            type: 'warehouse'
+          }, {
+            position: new google.maps.LatLng(49.5810120000, 0.06987820000),
+            type: 'port'
+          }, {
+            position: new google.maps.LatLng(49.4810120000, 2.0687820000),
+            type: 'airport'
+          }, {
+            position: new google.maps.LatLng(46.610120000, 0.06987820000),
+            type: 'client'
+          }, {
+            position: new google.maps.LatLng(46.50120000, 2.86987820000),
+            type: 'client'
+          }, {
+            position: new google.maps.LatLng(47.510120000, 5.16987820000),
+            type: 'client'
+          } 
+        ];
+
+        // Create markers.
+        features.forEach(function(feature) {
+          var marker = new google.maps.Marker({
+            position: feature.position,
+            icon: icons[feature.type].icon,
+            map: map
+          });
+        });
+
+
+      }
+    </script>
+    
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDyGDJqa3ae7Lju9T6IGOJ-sMNNiDUchTY&callback=initMap">
+    </script>
+   
+  </body>
+</html>
